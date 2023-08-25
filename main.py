@@ -1,11 +1,23 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
 
 driver = webdriver.Chrome()
 
 driver.get("https://www.deriv.com")
 
-text_box = driver.find_element(by=By.NAME, value="my-text")
-submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
+time.sleep(5)
 
-print(driver)
+# Procura o botao de login na pagina e atribui a variabel chamada botao
+botao = driver.find_element(by=By.ID, value="dm-nav-login-button")
+
+# Clica no botão de login do site
+botao.click()
+
+time.sleep(5)
+
+# Encontra o campo de email
+email = driver.find_element(by=By.ID, value="txtEmail")
+email.text = "flaviomarcioti@gmail.com"
+
+print("finalizado")
