@@ -1,6 +1,11 @@
+import os
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
+
+user = os.environ["email"]
+password = os.environ["password"]
 
 driver = webdriver.Chrome()
 
@@ -18,6 +23,6 @@ time.sleep(5)
 
 # Encontra o campo de email
 email = driver.find_element(by=By.ID, value="txtEmail")
-email.send_keys("flaviomarcioti@gmail.com")
+email.send_keys(user)
 
 print("finalizado")
