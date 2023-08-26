@@ -4,7 +4,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-user = os.environ["email"]
+user = os.environ["user"]
 password = os.environ["password"]
 
 driver = webdriver.Chrome()
