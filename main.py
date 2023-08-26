@@ -18,6 +18,6 @@ time.sleep(5)
 
 # Encontra o campo de email
 email = driver.find_element(by=By.ID, value="txtEmail")
-email.text = "flaviomarcioti@gmail.com"
+email.send_keys("flaviomarcioti@gmail.com")
 
 print("finalizado")
