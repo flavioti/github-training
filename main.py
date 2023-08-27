@@ -25,4 +25,8 @@ time.sleep(5)
 email = driver.find_element(by=By.ID, value="txtEmail")
 email.send_keys(user)
 
+# Encontrar o campo de senha 
+senha = driver.find_element(by= By.ID, value="txtPass")
+senha.send_keys(password)
+
 print("finalizado")
