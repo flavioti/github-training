@@ -29,4 +29,10 @@ email.send_keys(user)
 senha = driver.find_element(by= By.ID, value="txtPass")
 senha.send_keys(password)
 
+# Encontrar botão conectar-se
+entrar = driver.find_element(By.CLASS_NAME,"button.button.secondary")
+
+# Clicar no botão conectar-se
+entrar.click() 
+
 print("finalizado")
