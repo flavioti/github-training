@@ -35,4 +35,8 @@ entrar = driver.find_element(By.CLASS_NAME,"button.button.secondary")
 # Clicar no botão conectar-se
 entrar.click() 
 
+# Aumentar o tamanho da tela
+driver.maximize_window()
+
+
 print("finalizado")
