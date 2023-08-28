@@ -85,8 +85,9 @@ espera_e_clica(id="dt_VRTC4693085")
 
 espera_e_clica(clazz="cq-symbol-select-btn")
 
+# Clica no volatilidade 100
 espera_e_clica(
-    xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[10]'
+    xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]'
 )
 
 # Código abaixo roda eternamente para manter a tela aberta após terminar a configuração
