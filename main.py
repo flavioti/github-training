@@ -11,16 +11,15 @@ password = os.environ["password"]
 
 
 def espera_e_clica(id: str = None, clazz: str = None, xpath: str = None):
-    time.sleep(1)
+    time.sleep(2)
     if id:
-        element = driver.find_element(by=By.ID, value=id)
+        element = wait.until(EC.presence_of_element_located((By.ID, id)))
     elif clazz:
-        element = driver.find_element(by=By.CLASS_NAME, value=clazz)
+        element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, clazz)))
     elif xpath:
-        element = driver.find_element(by=By.XPATH, value=xpath)
+        element = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
     else:
         raise Exception("Not id or clazz or xpath")
-    wait.until(lambda d: element.is_enabled() and element.is_displayed())
     element.click()
 
 
@@ -39,14 +38,9 @@ driver.implicitly_wait(seconds_to_wait)
 
 driver.get("https://www.deriv.com")
 
-# Procura o botao de login na pagina e atribui a variabel chamada botao
-botao = driver.find_element(by=By.ID, value="dm-nav-login-button")
-# Tenta diversas vezes localizar o campo de email, até o máximo de 5 segundos
-# dessa forma podemos remover o tempo de espera fixo, ficando mais rápido
-# Vamos usar esse código somente quando o campo demora muito para aparecer
-wait.until(lambda d: botao.is_enabled() and botao.is_displayed())
+
 # Clica no botão de login do site
-botao.click()
+espera_e_clica(id="dm-nav-login-button")
 
 # Encontra o campo de email
 email = driver.find_element(by=By.ID, value="txtEmail")
@@ -58,10 +52,7 @@ senha = driver.find_element(by=By.ID, value="txtPass")
 senha.send_keys(password)
 
 # Encontrar botão conectar-se
-entrar = driver.find_element(By.CLASS_NAME, "button.button.secondary")
-
-# Clicar no botão conectar-se
-entrar.click()
+espera_e_clica(clazz="button.button.secondary")
 
 # Aumentar o tamanho da tela
 driver.maximize_window()
@@ -69,9 +60,7 @@ driver.maximize_window()
 # ###### fim tela de login #######
 
 # Encontrar checkbox na tela de aviso após o login
-scammer_warning_checkbox_class = "warning-scam-message__checkbox-container--checkbox"
-scammer_warning_checkbox = driver.find_element(By.CLASS_NAME, scammer_warning_checkbox_class)
-scammer_warning_checkbox.click()
+espera_e_clica(clazz="warning-scam-message__checkbox-container--checkbox")
 
 # Encontrar botao para fechar tela de aviso
 scammer_warning_button_class = '//*[@id="warning_scam_message_modal"]/div/div/button'
