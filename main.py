@@ -9,6 +9,13 @@ password = os.environ["password"]
 
 driver = webdriver.Chrome()
 
+# Faz com que o driver sempre tente até 2 segundos carregar um objeto da página
+# O padrão é não esperar, tenta uma vez e se não encontrar dá erro
+# Configuração implícita global, serve para o restante do código
+seconds_to_wait = 2
+driver.implicitly_wait(seconds_to_wait)
+
+
 driver.get("https://www.deriv.com")
 
 time.sleep(5)
