@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Flavio Sousa <flaviomarcioti@gmail.com>"]
 readme = "README.md"
-packages = [{include = "github_training"}]
+packages = []
 
 [tool.poetry.dependencies]
 python = "^3.9"
