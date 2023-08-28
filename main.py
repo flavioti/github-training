@@ -85,10 +85,21 @@ espera_e_clica(id="dt_VRTC4693085")
 
 espera_e_clica(clazz="cq-symbol-select-btn")
 
+# sintetico
+espera_e_clica(
+    xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[3]/div[2]'
+)
+
 # Clica no volatilidade 100
 espera_e_clica(
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]'
 )
+
+espera_e_clica(xpath='//*[@id="dt_contract_dropdown"]/div[1]')
+espera_e_clica(id="dt_contract_match_diff_item")
+
+
+espera_e_clica(xpath='//*[@id="trade_container"]/div[4]/div/fieldset[2]/div[2]/label/div[1]/span[1]')
 
 # Código abaixo roda eternamente para manter a tela aberta após terminar a configuração
 # Caso o navegador seja fechado, o código também será encerrado
