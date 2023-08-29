@@ -6,17 +6,24 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+print("rodando")
+
 user = os.environ["user"]
 password = os.environ["password"]
+demo = os.environ["demo"]
 
-
-def espera_e_clica(id: str = None, clazz: str = None, xpath: str = None):
+def espera_e_clica(id: str = None, clazz: str = None, xpath: str = None, description: str = None):
+    if description:
+        print(description)
     time.sleep(2)
     if id:
+        print(id)
         element = wait.until(EC.presence_of_element_located((By.ID, id)))
     elif clazz:
+        print(clazz)
         element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, clazz)))
     elif xpath:
+        print(xpath)
         element = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
     else:
         raise Exception("Not id or clazz or xpath")
@@ -79,8 +86,8 @@ espera_e_clica(id="dt_core_account-info_acc-info")
 espera_e_clica(id="dt_core_account-switcher_demo-tab")
 
 # Clica na conta demo
-espera_e_clica(id="dt_VRTC4693085")
-
+time.sleep(1)
+espera_e_clica(xpath= demo)
 # ###### fim da configuração da conta demo
 
 espera_e_clica(clazz="cq-symbol-select-btn")
@@ -94,9 +101,10 @@ espera_e_clica(
 espera_e_clica(
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]'
 )
+# Igual\diferente
+espera_e_clica(xpath='//*[@id="dt_contract_dropdown"]/div[1]', description="Click on Matches/Differs (1)")
 
-espera_e_clica(xpath='//*[@id="dt_contract_dropdown"]/div[1]')
-espera_e_clica(id="dt_contract_match_diff_item")
+espera_e_clica(xpath='//*[@id="dt_contract_match_diff_item"]', description="Click on Matches/Differs (2)")
 
 
 espera_e_clica(xpath='//*[@id="trade_container"]/div[4]/div/fieldset[2]/div[2]/label/div[1]/span[1]')
