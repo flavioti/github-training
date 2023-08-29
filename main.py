@@ -2,6 +2,7 @@ import os
 import time
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -11,6 +12,7 @@ print("rodando")
 user = os.environ["user"]
 password = os.environ["password"]
 demo = os.environ["demo"]
+
 
 def espera_e_clica(id: str = None, clazz: str = None, xpath: str = None, description: str = None):
     if description:
@@ -87,7 +89,7 @@ espera_e_clica(id="dt_core_account-switcher_demo-tab")
 
 # Clica na conta demo
 time.sleep(1)
-espera_e_clica(xpath= demo)
+espera_e_clica(xpath=demo)
 # ###### fim da configuração da conta demo
 
 espera_e_clica(clazz="cq-symbol-select-btn")
@@ -104,7 +106,16 @@ espera_e_clica(
 # Igual\diferente
 espera_e_clica(xpath='//*[@id="dt_contract_dropdown"]/div[1]', description="Click on Matches/Differs (1)")
 
-espera_e_clica(xpath='//*[@id="dt_contract_match_diff_item"]', description="Click on Matches/Differs (2)")
+
+time.sleep(2)
+element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="dt_contract_match_diff_item"]')))
+try:
+    ActionChains(driver).scroll_to_element(element).perform()
+except Exception:
+    pass
+element.click()
+
+# espera_e_clica(xpath=, description="Click on Matches/Differs (2)")
 
 
 espera_e_clica(xpath='//*[@id="trade_container"]/div[4]/div/fieldset[2]/div[2]/label/div[1]/span[1]')
