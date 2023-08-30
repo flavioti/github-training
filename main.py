@@ -179,6 +179,7 @@ try:
     ActionChains(driver).scroll_to_element(element).perform()
 except Exception:
     pass
+time.sleep(2)
 element.click()
 
 
