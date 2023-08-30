@@ -213,6 +213,7 @@ preco_anterior = None
 # Código abaixo roda eternamente para manter a tela aberta após terminar a configuração
 # Caso o navegador seja fechado, o código também será encerrado
 navegador_aberto = True
+ultima_entrada = None
 while navegador_aberto:
     # numero_atual = espera_e_clica(
     #     action="ler",
@@ -223,6 +224,10 @@ while navegador_aberto:
     preco_atual = element_num.text.ljust(8, " ")
 
     digito = preco_atual.strip()[-1:]
+
+    if digito == ultima_entrada:
+        # Nao jogar, mesmo numero
+        continue
 
     if preco_atual != preco_anterior:
         n0 = float(ele00.text.replace("0\n", "").replace("%", ""))
@@ -239,12 +244,18 @@ while navegador_aberto:
         alist = [n0, n1, n2, n3, n4, n5, n6, n7, n8, n9]
 
         menor_perc = min(alist)
-        menor_idx = alist.index(min(alist))
+
+        # TODO: As vezes tem dois numero com porcentagens baixas e iguais, nesse caso aborta (não joga)
+        menor_idx = alist.index(min(alist))  # Pega o menor numero
+
+        # TODO: Quando mudar o numero com menor probabilidade, mudar last digit prediction
 
         if str(digito) == str(menor_idx):
             apostar = "yes"
 
-            # APOSTAR AQUI
+            # TODO: Clicar no botão Differs
+
+            ultima_entrada = digito
 
         else:
             apostar = "no"
