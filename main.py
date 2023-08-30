@@ -20,7 +20,7 @@ password = os.environ["password"]
 demo = os.environ["demo"]
 
 
-def espera_e_clica(
+def faz_tudo(
     action: str,  # clicar, digitar ou ler
     id: str = None,
     clazz: str = None,
@@ -78,14 +78,14 @@ driver.get("https://www.deriv.com")
 
 
 # Clica no botão de login do site
-espera_e_clica(
+faz_tudo(
     action="clicar",
     id="dm-nav-login-button",
     description="Clicando no botão de login",
 )
 
 # Encontra o campo de email
-espera_e_clica(
+faz_tudo(
     action="digitar",
     texto=username,
     id="txtEmail",
@@ -93,7 +93,7 @@ espera_e_clica(
 )
 
 # Encontrar o campo de senha
-espera_e_clica(
+faz_tudo(
     action="digitar",
     texto=password,
     id="txtPass",
@@ -101,7 +101,7 @@ espera_e_clica(
 )
 
 # Encontrar botão conectar-se
-espera_e_clica(action="clicar", clazz="button.button.secondary")
+faz_tudo(action="clicar", clazz="button.button.secondary")
 
 # Aumentar o tamanho da tela
 driver.maximize_window()
@@ -109,14 +109,14 @@ driver.maximize_window()
 # ###### fim tela de login #######
 
 # Encontrar checkbox na tela de aviso após o login
-espera_e_clica(
+faz_tudo(
     action="clicar",
     clazz="warning-scam-message__checkbox-container--checkbox",
     description="Marcar checkbox na tela modal após o login",
 )
 
 # Encontrar botao para fechar tela de aviso
-espera_e_clica(
+faz_tudo(
     action="clicar",
     xpath='//*[@id="warning_scam_message_modal"]/div/div/button',
     description="Fechar tela modal após o login",
@@ -126,47 +126,47 @@ espera_e_clica(
 # ###### Escolher a conta de demonstração (DEMO)
 
 # Clica no botão para escolher conta
-espera_e_clica(
+faz_tudo(
     action="clicar",
     id="dt_core_account-info_acc-info",
     description="Escolher conta",
 )
 
 # Clica na aba da janelinha
-espera_e_clica(
+faz_tudo(
     action="clicar",
     id="dt_core_account-switcher_demo-tab",
     description="Clicar na aba após conta",
 )
 
 # Clica na conta demo
-espera_e_clica(
+faz_tudo(
     action="clicar",
     xpath=demo,
     description="Escolher conta de demonstração",
 )
 # ###### fim da configuração da conta demo
 
-espera_e_clica(
+faz_tudo(
     action="clicar",
     clazz="cq-symbol-select-btn",
     description="Escolhendo tipo de jogo",
 )
 
 # sintetico
-espera_e_clica(
+faz_tudo(
     action="clicar",
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[3]/div[2]',
 )
 
 # Clica no volatilidade 100
-espera_e_clica(
+faz_tudo(
     action="clicar",
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]',
     description="Escolher volatilidade 100",
 )
 # Igual\diferente
-espera_e_clica(
+faz_tudo(
     action="clicar",
     xpath='//*[@id="dt_contract_dropdown"]/div[1]',
     description="Click on Matches/Differs (1)",
@@ -183,7 +183,7 @@ time.sleep(2)
 element.click()
 
 
-espera_e_clica(
+faz_tudo(
     action="clicar",
     xpath='//*[@id="trade_container"]/div[4]/div/fieldset[2]/div[2]/label/div[1]/span[1]',
     description="Escolhe match/differ",
@@ -241,6 +241,9 @@ while navegador_aberto:
 
         if str(digito) == str(menor_idx):
             apostar = "yes"
+
+            # APOSTAR AQUI
+
         else:
             apostar = "no"
 
