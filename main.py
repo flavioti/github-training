@@ -28,6 +28,7 @@ def faz_tudo(
     description: str = None,
     texto: str = None,
 ):
+    time.sleep(0.5)
     max_tentativas = 50  # Máximo de tentativas
     contagem_tentativas = 0  # Guarda a quantidade de tentativas
     terminado = False  # Guarda informação se conseguiu clicar ou não no elemento
@@ -163,6 +164,7 @@ faz_tudo(
 faz_tudo(
     action="clicar",
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]',
+    # clazz='sc-mcd__item--R_100 '
     description="Escolher volatilidade 100",
 )
 # Igual\diferente
