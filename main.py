@@ -254,7 +254,7 @@ while navegador_aberto:
             apostar = "yes"
 
             # TODO: Clicar no botão Differs
-
+            faz_tudo(action="clicar",xpath='//*[@id="trade_container"]/div[4]/div/div/fieldset[2]')
             ultima_entrada = digito
 
         else:
