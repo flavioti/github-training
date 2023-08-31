@@ -148,6 +148,7 @@ faz_tudo(
 )
 # ###### fim da configuração da conta demo
 
+time.sleep(3)
 faz_tudo(
     action="clicar",
     clazz="cq-symbol-select-btn",
@@ -162,7 +163,7 @@ faz_tudo(
 )
 
 # Clica no volatilidade 100
-time.sleep(1)
+time.sleep(3)
 faz_tudo(
     action="clicar",
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]',
@@ -213,26 +214,40 @@ element_num = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "cq-curr
 
 preco_anterior = None
 
-# Código abaixo roda eternamente para manter a tela aberta após terminar a configuração
-# Caso o navegador seja fechado, o código também será encerrado
-navegador_aberto = True
-ultima_entrada = None
-while navegador_aberto:
-    # numero_atual = espera_e_clica(
-    #     action="ler",
-    #     clazz="cq-current-price",
-    #     description="Numero atual",
-    # )
+pred_0 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[1]/span[1]'
+)
+pred_1 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[1]/span[2]'
+)
+pred_2 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[1]/span[3]'
+)
+pred_3 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[1]/span[4]'
+)
+pred_4 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[1]/span[5]'
+)
+pred_5 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[2]/span[1]'
+)
+pred_6 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[2]/span[2]'
+)
+pred_7 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[2]/span[3]'
+)
+pred_8 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[2]/span[4]'
+)
+pred_9 = driver.find_element(
+    by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[3]/div[2]/div[2]/span[5]'
+)
 
-    preco_atual = element_num.text.ljust(8, " ")
 
-    digito = preco_atual.strip()[-1:]
-
-    if digito == ultima_entrada:
-        # Nao jogar, mesmo numero
-        continue
-
-    if preco_atual != preco_anterior:
+def ler_percentuais():
+    try:
         n0 = float(ele00.text.replace("0\n", "").replace("%", ""))
         n1 = float(ele02.text.replace("1\n", "").replace("%", ""))
         n2 = float(ele04.text.replace("2\n", "").replace("%", ""))
@@ -243,42 +258,80 @@ while navegador_aberto:
         n7 = float(ele14.text.replace("7\n", "").replace("%", ""))
         n8 = float(ele16.text.replace("8\n", "").replace("%", ""))
         n9 = float(ele18.text.replace("9\n", "").replace("%", ""))
+        return n0, n1, n2, n3, n4, n5, n6, n7, n8, n9
+    except Exception:
+        return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
+
+# Código abaixo roda eternamente para manter a tela aberta após terminar a configuração
+# Caso o navegador seja fechado, o código também será encerrado
+navegador_aberto = True
+entrada_anterior = "?"
+menor_anterior = "?"
+while navegador_aberto:
+    try:
+        preco_atual = element_num.text
+        digito_atual = preco_atual.strip()[-1:]
+        n0, n1, n2, n3, n4, n5, n6, n7, n8, n9 = ler_percentuais()
         alist = [n0, n1, n2, n3, n4, n5, n6, n7, n8, n9]
 
-        menor_perc = min(alist)
-
         # TODO: As vezes tem dois numero com porcentagens baixas e iguais, nesse caso aborta (não joga)
-        menor_idx = alist.index(min(alist))  # Pega o menor numero
+        menor_atual = alist.index(min(alist))  # Pega o menor numero
 
-        # TODO: Quando mudar o numero com menor probabilidade, mudar last digit prediction
+        # Somente troca o prediction se digito for novo (diferente)
+        if menor_atual != menor_anterior:
+            if menor_atual == 0:
+                pred_0.click()
+            elif menor_atual == 1:
+                pred_1.click()
+            elif menor_atual == 2:
+                pred_2.click()
+            elif menor_atual == 3:
+                pred_3.click()
+            elif menor_atual == 4:
+                pred_4.click()
+            elif menor_atual == 5:
+                pred_5.click()
+            elif menor_atual == 6:
+                pred_6.click()
+            elif menor_atual == 7:
+                pred_7.click()
+            elif menor_atual == 8:
+                pred_8.click()
+            elif menor_atual == 9:
+                pred_9.click()
 
-        if str(digito) == str(menor_idx):
-            apostar = "yes"
-            faz_tudo(action="clicar", clazz="btn-purchase__info", description="Clicar em difere")
-            ultima_entrada = digito
-        else:
-            apostar = "no"
+        apostar = False
+        if preco_atual != preco_anterior and str(digito_atual) == str(menor_atual) and digito_atual != entrada_anterior:
+            apostar = True
+            driver.find_element(by=By.CLASS_NAME, value="btn-purchase__info").click()
 
-        logger.info(
-            f"{preco_atual} "
-            + f"{str(n0).ljust(4, ' ')} "
-            + f"{str(n1).ljust(4, ' ')} "
-            + f"{str(n2).ljust(4, ' ')} "
-            + f"{str(n3).ljust(4, ' ')} "
-            + f"{str(n4).ljust(4, ' ')} "
-            + f"{str(n5).ljust(4, ' ')} "
-            + f"{str(n6).ljust(4, ' ')} "
-            + f"{str(n7).ljust(4, ' ')} "
-            + f"{str(n8).ljust(4, ' ')} "
-            + f"{str(n9).ljust(4, ' ')} "
-            + f" menor {menor_perc} "
-            + f" idx {menor_idx} "
-            + f" digito {digito}"
-            + f" apostar {apostar}"
-        )
+            entrada_anterior = digito_atual
+            menor_anterior = menor_atual
+
+        if preco_atual != preco_anterior:
+            logger.info(
+                f"{preco_atual.ljust(8, ' ')} "
+                + f"{str(n0).ljust(4, ' ')} "
+                + f"{str(n1).ljust(4, ' ')} "
+                + f"{str(n2).ljust(4, ' ')} "
+                + f"{str(n3).ljust(4, ' ')} "
+                + f"{str(n4).ljust(4, ' ')} "
+                + f"{str(n5).ljust(4, ' ')} "
+                + f"{str(n6).ljust(4, ' ')} "
+                + f"{str(n7).ljust(4, ' ')} "
+                + f"{str(n8).ljust(4, ' ')} "
+                + f"{str(n9).ljust(4, ' ')} "
+                # + f"menor {menor_perc} "
+                + f"menor {menor_atual} "
+                + f"digito {digito_atual} "
+                + f"entrada_anterior {entrada_anterior} "
+                + f"apostar {apostar} "
+            )
 
         preco_anterior = preco_atual
 
+    except Exception:
+        pass
 
 logger.info("finalizado")
