@@ -304,7 +304,7 @@ while navegador_aberto:
         apostar = False
         if preco_atual != preco_anterior and str(digito_atual) == str(menor_atual) and digito_atual != entrada_anterior:
             apostar = True
-            driver.find_element(by=By.XPATH, value='//*[@id="trade_container"]/div[4]/div/fieldset[2]/div[2]/label/div[1]/span[1]').click()
+            driver.find_element(by=By.ID, value="dt_purchase_digitdiff_button").click()
 
             entrada_anterior = digito_atual
             menor_anterior = menor_atual
@@ -331,7 +331,7 @@ while navegador_aberto:
 
         preco_anterior = preco_atual
 
-    except Exception:
-        pass
+    except Exception as error:
+        logger.exception(error)
 
 logger.info("finalizado")
