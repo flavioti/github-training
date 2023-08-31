@@ -28,7 +28,6 @@ def faz_tudo(
     description: str = None,
     texto: str = None,
 ):
-    time.sleep(0.5)
     max_tentativas = 50  # Máximo de tentativas
     contagem_tentativas = 0  # Guarda a quantidade de tentativas
     terminado = False  # Guarda informação se conseguiu clicar ou não no elemento
@@ -60,6 +59,7 @@ def faz_tudo(
             logger.error(f"Erro na tentativa #{contagem_tentativas} ao ler {description}")
             if contagem_tentativas >= max_tentativas:
                 raise exc
+            time.sleep(0.5)
 
 
 driver = webdriver.Chrome()
@@ -155,12 +155,14 @@ faz_tudo(
 )
 
 # sintetico
+time.sleep(3)  # Para funcionar no laptop do Flávio
 faz_tudo(
     action="clicar",
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[3]/div[2]',
 )
 
 # Clica no volatilidade 100
+time.sleep(1)
 faz_tudo(
     action="clicar",
     xpath='//*[@id="trade"]/div/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[1]/div[11]',
@@ -168,6 +170,7 @@ faz_tudo(
     description="Escolher volatilidade 100",
 )
 # Igual\diferente
+time.sleep(1)
 faz_tudo(
     action="clicar",
     xpath='//*[@id="dt_contract_dropdown"]/div[1]',
@@ -252,26 +255,23 @@ while navegador_aberto:
 
         if str(digito) == str(menor_idx):
             apostar = "yes"
-
-            # TODO: Clicar no botão Differs
-            faz_tudo(action="clicar",xpath='//*[@id="trade_container"]/div[4]/div/div/fieldset[2]')
+            faz_tudo(action="clicar", clazz="btn-purchase__info", description="Clicar em difere")
             ultima_entrada = digito
-
         else:
             apostar = "no"
 
         logger.info(
             f"{preco_atual} "
-            + f"{str(n0).ljust(6, ' ')} "
-            + f"{str(n1).ljust(6, ' ')} "
-            + f"{str(n2).ljust(6, ' ')} "
-            + f"{str(n3).ljust(6, ' ')} "
-            + f"{str(n4).ljust(6, ' ')} "
-            + f"{str(n5).ljust(6, ' ')} "
-            + f"{str(n6).ljust(6, ' ')} "
-            + f"{str(n7).ljust(6, ' ')} "
-            + f"{str(n8).ljust(6, ' ')} "
-            + f"{str(n9).ljust(6, ' ')} "
+            + f"{str(n0).ljust(4, ' ')} "
+            + f"{str(n1).ljust(4, ' ')} "
+            + f"{str(n2).ljust(4, ' ')} "
+            + f"{str(n3).ljust(4, ' ')} "
+            + f"{str(n4).ljust(4, ' ')} "
+            + f"{str(n5).ljust(4, ' ')} "
+            + f"{str(n6).ljust(4, ' ')} "
+            + f"{str(n7).ljust(4, ' ')} "
+            + f"{str(n8).ljust(4, ' ')} "
+            + f"{str(n9).ljust(4, ' ')} "
             + f" menor {menor_perc} "
             + f" idx {menor_idx} "
             + f" digito {digito}"
