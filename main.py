@@ -306,22 +306,31 @@ while navegador_aberto:
             apostar = True
             driver.find_element(by=By.ID, value="dt_purchase_digitdiff_button").click()
 
+            time.sleep(2)
+
+            results = driver.find_elements(by=By.CLASS_NAME, value="dc-result__caption")
+            print(results)
+            print(results[0].text)
+            print(results[0])
+            texto = results[0]
+            logger.info(texto)
+
             entrada_anterior = digito_atual
             menor_anterior = menor_atual
 
         if preco_atual != preco_anterior:
             logger.info(
                 f"{preco_atual.ljust(8, ' ')} "
-                + f"{str(n0).ljust(4, ' ')} "
-                + f"{str(n1).ljust(4, ' ')} "
-                + f"{str(n2).ljust(4, ' ')} "
-                + f"{str(n3).ljust(4, ' ')} "
-                + f"{str(n4).ljust(4, ' ')} "
-                + f"{str(n5).ljust(4, ' ')} "
-                + f"{str(n6).ljust(4, ' ')} "
-                + f"{str(n7).ljust(4, ' ')} "
-                + f"{str(n8).ljust(4, ' ')} "
-                + f"{str(n9).ljust(4, ' ')} "
+                # + f"{str(n0).ljust(4, ' ')} "
+                # + f"{str(n1).ljust(4, ' ')} "
+                # + f"{str(n2).ljust(4, ' ')} "
+                # + f"{str(n3).ljust(4, ' ')} "
+                # + f"{str(n4).ljust(4, ' ')} "
+                # + f"{str(n5).ljust(4, ' ')} "
+                # + f"{str(n6).ljust(4, ' ')} "
+                # + f"{str(n7).ljust(4, ' ')} "
+                # + f"{str(n8).ljust(4, ' ')} "
+                # + f"{str(n9).ljust(4, ' ')} "
                 # + f"menor {menor_perc} "
                 + f"menor {menor_atual} "
                 + f"digito {digito_atual} "
