@@ -18,8 +18,32 @@
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "justMyCode": true,
-            "envFile": "${workspaceFolder}/.env"
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "--conta",
+                "real"
+            ]
+        },
+        {
+            "name": "Streamlit",
+            "type": "python",
+            "request": "launch",
+            "module": "streamlit",
+            "env": {
+                "STREAMLIT_APP": "app.py",
+                "STREAMLIT_ENV": "development",
+                "PYTHONPATH": "${workspaceRoot}/src",
+            },
+            "args": [
+                "run",
+                "/Users/flavio.sousa/Developer/github_flavio/github-training/app.py",
+                "--logger.level",
+                "debug",
+                "--browser.gatherUsageStats",
+                "false"
+            ],
+            "jinja": true
         }
     ]
 }

@@ -7,8 +7,9 @@ readme = "README.md"
 packages = []
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.9.7 || >3.9.7,<4.0"
 selenium = "^4.11.2"
+streamlit = "^1.26.0"
 
 
 [build-system]
