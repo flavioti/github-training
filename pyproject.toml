@@ -7,10 +7,17 @@ readme = "README.md"
 packages = []
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.9.7 || >3.9.7,<4.0"
+python = ">=3.9,<3.9.7 || >3.9.7,<3.13"
 selenium = "^4.11.2"
 streamlit = "^1.26.0"
+matplotlib = "^3.7.2"
+plotly = "^5.16.1"
+scipy = "^1.11.2"
+numpy = "^1.25.2"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.25.2"
 
 [build-system]
 requires = ["poetry-core"]

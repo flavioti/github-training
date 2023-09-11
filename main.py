@@ -292,27 +292,27 @@ class DerivBot:
             menor_atual = alist.index(min(alist))  # Pega o menor numero
 
             # Somente troca o prediction se digito for novo (diferente)
-            if menor_atual != menor_anterior:
-                if menor_atual == 0:
-                    pred_0.click()
-                elif menor_atual == 1:
-                    pred_1.click()
-                elif menor_atual == 2:
-                    pred_2.click()
-                elif menor_atual == 3:
-                    pred_3.click()
-                elif menor_atual == 4:
-                    pred_4.click()
-                elif menor_atual == 5:
-                    pred_5.click()
-                elif menor_atual == 6:
-                    pred_6.click()
-                elif menor_atual == 7:
-                    pred_7.click()
-                elif menor_atual == 8:
-                    pred_8.click()
-                elif menor_atual == 9:
-                    pred_9.click()
+            # if menor_atual != menor_anterior:
+            if menor_atual == 0:
+                pred_0.click()
+            elif menor_atual == 1:
+                pred_1.click()
+            elif menor_atual == 2:
+                pred_2.click()
+            elif menor_atual == 3:
+                pred_3.click()
+            elif menor_atual == 4:
+                pred_4.click()
+            elif menor_atual == 5:
+                pred_5.click()
+            elif menor_atual == 6:
+                pred_6.click()
+            elif menor_atual == 7:
+                pred_7.click()
+            elif menor_atual == 8:
+                pred_8.click()
+            elif menor_atual == 9:
+                pred_9.click()
 
             apostar = False
             if (
