@@ -280,7 +280,7 @@ class DerivBot:
 
         # Código abaixo roda eternamente para manter a tela aberta após terminar a configuração
         entrada_anterior = "?"
-        menor_anterior = "?"
+        # menor_anterior = "?"
         data_hora_inicial = datetime.now()
 
         while True:
@@ -321,6 +321,14 @@ class DerivBot:
                 and digito_atual != entrada_anterior
             ):
                 apostar = True
+
+                element = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, "sidebar__items")))
+                try:
+                    ActionChains(self.driver).scroll_to_element(element).perform()
+                except Exception:
+                    pass
+                time.sleep(0.1)
+
                 self.driver.find_element(by=By.ID, value="dt_purchase_digitdiff_button").click()
 
                 # Espera 5 segundos para que o resultado apareça
@@ -334,7 +342,7 @@ class DerivBot:
                     logger.info("Erro ao tentar obter resultado")
 
                 entrada_anterior = digito_atual
-                menor_anterior = menor_atual
+                # menor_anterior = menor_atual
 
             tempo_decorrido = datetime.now() - data_hora_inicial
 
