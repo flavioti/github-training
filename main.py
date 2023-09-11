@@ -78,6 +78,7 @@ class DerivBot:
         # O padrão é não esperar, tenta uma vez e se não encontrar dá erro
         # Configuração implícita global, serve para o restante do código
         self.driver.implicitly_wait(5)
+
         self.driver.get("https://www.deriv.com")
 
         # Clica no botão de login do site
@@ -107,7 +108,8 @@ class DerivBot:
         self.faz_tudo(action="clicar", clazz="button.button.secondary")
 
         # Aumentar o tamanho da tela
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
+        self.driver.set_window_size(1700, 1000)
 
         # ###### fim tela de login #######
 
