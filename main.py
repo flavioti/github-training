@@ -329,7 +329,7 @@ class DerivBot:
                     pass
                 time.sleep(0.1)
 
-                self.driver.find_element(by=By.ID, value="sidebar__items").click()
+                self.driver.find_element(by=By.ID, value="dt_purchase_digitdiff_button").click()
 
                 # Espera 5 segundos para que o resultado apareça
                 time.sleep(10)
